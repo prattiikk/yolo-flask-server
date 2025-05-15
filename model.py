@@ -8,7 +8,9 @@ import time
 from datetime import datetime
 
 app = Flask(__name__)
-model = YOLO("./best_second.pt")
+
+model = YOLO("./epoch140.pt")
+
 CLASS_NAMES = {0: "Drain Hole", 1: "Pothole", 2: "Sewer Cover"}
 
 # Define severity levels based on area and confidence
@@ -157,6 +159,8 @@ def predict():
         },
         "timestamp": datetime.now().isoformat()
     }
+
+    print(summary)
     
     return jsonify({
         "detections": detections,
@@ -166,4 +170,5 @@ def predict():
     })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=6000)
+
